@@ -1,6 +1,17 @@
+import { adminConfig, validatePassword } from './config.js';
+
 // بررسی وضعیت ورود
 function checkLoginStatus() {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    const token = sessionStorage.getItem('adminToken');
+    if (!token) return false;
+    
+    try {
+        // بررسی اعتبار توکن
+        const tokenData = JSON.parse(atob(token));
+        return tokenData.username === adminConfig.username && tokenData.exp > Date.now();
+    } catch {
+        return false;
+    }
 }
 
 // اگر کاربر وارد نشده باشد، به صفحه ورود هدایت می‌شود
@@ -15,7 +26,7 @@ let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
 function getAdminCredentials() {
     return JSON.parse(localStorage.getItem('adminCredentials')) || {
         username: 'admin',
-        password: '123456'
+        password: 'Xzsawq21'
     };
 }
 
@@ -33,10 +44,8 @@ document.getElementById('settings-form').addEventListener('submit', function(e) 
     const newPassword = document.getElementById('new-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
     
-    const currentCredentials = getAdminCredentials();
-    
     // بررسی رمز عبور فعلی
-    if (currentPassword !== currentCredentials.password) {
+    if (!validatePassword(currentPassword)) {
         alert('رمز عبور فعلی اشتباه است!');
         return;
     }
@@ -48,13 +57,8 @@ document.getElementById('settings-form').addEventListener('submit', function(e) 
     }
     
     // ذخیره اطلاعات جدید
-    setAdminCredentials({
-        username: newUsername,
-        password: newPassword
-    });
-    
-    alert('اطلاعات حساب کاربری با موفقیت بروزرسانی شد!');
-    this.reset();
+    // این بخش باید توسط API سمت سرور انجام شود
+    alert('برای تغییر رمز عبور، لطفاً با مدیر سیستم تماس بگیرید.');
 });
 
 // تابع تبدیل اعداد به فارسی
