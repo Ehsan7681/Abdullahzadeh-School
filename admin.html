@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت - مدرسه عبدالله زاده</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vazirmatn/matn@1.0.0/dist/font-face.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* استایل ساده منوی موبایل */
+        .mobile-nav {
+            display: none;
+        }
+        
+        #menuBtn {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+                        inset 0 0 15px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (min-width: 769px) {
+            #menuBtn {
+                display: none !important;
+            }
+            
+            .mobile-nav {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            #menuBtn {
+                display: flex;
+            }
+            
+            .admin-main {
+                padding-top: 70px;
+            }
+            
+            header {
+                position: relative;
+            }
+        }
+        
+        #menuBtn:hover {
+            transform: translateY(-50%) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15),
+                       inset 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+        
+        #menuBtn:active {
+            transform: translateY(-50%) scale(0.95);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        #menuBtn i {
+            transition: transform 0.3s ease;
+        }
+        
+        #menuBtn:hover i {
+            transform: scale(1.1);
+        }
+        
+        .mobile-links {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding-top: 80px;
+            z-index: 9998;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+        
+        .mobile-links a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-links a:hover {
+            background: rgba(255,255,255,0.1);
+            padding-right: 25px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>پنل مدیریت</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">بازگشت به سایت</a></li>
+                <li><a href="#registrations">ثبت‌نام‌ها</a></li>
+                <li><a href="#settings">تنظیمات</a></li>
+            </ul>
+        </nav>
+        
+        <!-- منوی موبایل ساده -->
+        <button id="menuBtn" onclick="toggleMenu()">منو</button>
+        
+        <div id="mobileNav" class="mobile-nav">
+            <div class="mobile-links">
+                <a href="index.html">بازگشت به سایت</a>
+                <a href="#registrations">ثبت‌نام‌ها</a>
+                <a href="#settings">تنظیمات</a>
+            </div>
+        </div>
+    </header>
+    
+    <script>
+        // تابع ساده برای باز و بسته کردن منو
+        function toggleMenu() {
+            var menu = document.getElementById('mobileNav');
+            var menuBtn = document.getElementById('menuBtn');
+            
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+                menuBtn.textContent = 'منو';
+            } else {
+                menu.style.display = 'block';
+                menuBtn.textContent = 'بستن';
+            }
+        }
+        
+        // بستن منو با کلیک روی لینک‌ها
+        document.querySelectorAll('.mobile-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileNav').style.display = 'none';
+                document.getElementById('menuBtn').textContent = 'منو';
+            });
+        });
+    </script>
+
+    <main class="admin-main">
+        <section id="registrations" class="admin-section">
+            <h2>لیست ثبت‌نام‌ها</h2>
+            <div class="admin-section-content">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="جستجو...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                    <div class="pagination-controls">
+                        <label for="items-per-page">تعداد در هر صفحه:</label>
+                        <select id="items-per-page">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="registrations-table-container">
+                    <table class="registrations-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="index">ردیف</th>
+                                <th data-sort="name">نام و نام خانوادگی</th>
+                                <th data-sort="grade">پایه تحصیلی</th>
+                                <th data-sort="phone">شماره تماس</th>
+                                <th data-sort="date">تاریخ ثبت‌نام</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrations-list">
+                            <!-- اطلاعات ثبت‌نام‌ها اینجا نمایش داده می‌شود -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prev-page" class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-right"></i> صفحه قبل
+                    </button>
+                    <span id="page-info">صفحه 1 از 1</span>
+                    <button id="next-page" class="pagination-btn" disabled>
+                        صفحه بعد <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings" class="admin-section">
+            <h2>تنظیمات حساب کاربری</h2>
+            <div class="admin-section-content">
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="current-password">رمز عبور فعلی:</label>
+                        <input type="password" id="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-username">نام کاربری جدید:</label>
+                        <input type="text" id="new-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">رمز عبور جدید:</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تکرار رمز عبور جدید:</label>
+                        <input type="password" id="confirm-password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">ذخیره تغییرات</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="site-settings" class="admin-section">
+            <h2>تنظیمات سایت</h2>
+            <div class="admin-section-content">
+                <div class="settings-container">
+                    <div class="settings-form-container">
+                        <form id="site-settings-form">
+                            <div class="settings-group">
+                                <h3>بخش اصلی سایت</h3>
+                                <div class="form-group">
+                                    <label for="hero-title">عنوان اصلی:</label>
+                                    <input type="text" id="hero-title" required>
+                                    <span class="form-hint">این متن در بالای صفحه اصلی نمایش داده می‌شود</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hero-description">توضیحات اصلی:</label>
+                                    <textarea id="hero-description" required></textarea>
+                                    <span class="form-hint">این متن در زیر عنوان اصلی نمایش داده می‌شود</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hero-image">تصویر پس‌زمینه:</label>
+                                    <div class="image-upload-container">
+                                        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                                        <input type="text" id="hero-image" placeholder="آدرس تصویر" required>
+                                        <button type="button" class="upload-btn" onclick="document.getElementById('image-upload').click()">
+                                            <i class="fas fa-upload"></i> آپلود تصویر
+                                        </button>
+                                    </div>
+                                    <span class="form-hint">آدرس تصویری که در پس‌زمینه بخش اصلی نمایش داده می‌شود</span>
+                                    <div id="image-preview" class="image-preview"></div>
+                                </div>
+                            </div>
+
+                            <div class="settings-group">
+                                <h3>بخش درباره ما</h3>
+                                <div class="form-group">
+                                    <label for="about-title">عنوان بخش درباره ما:</label>
+                                    <input type="text" id="about-title" required>
+                                    <span class="form-hint">عنوان بخش درباره ما در صفحه اصلی</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="about-description">توضیحات درباره ما:</label>
+                                    <textarea id="about-description" required></textarea>
+                                    <span class="form-hint">متن توضیحات درباره مدرسه که در بخش درباره ما نمایش داده می‌شود</span>
+                                </div>
+                            </div>
+
+                            <div class="settings-group">
+                                <h3>اطلاعات تماس</h3>
+                                <div class="form-group">
+                                    <label for="contact-phone">شماره تماس:</label>
+                                    <input type="tel" id="contact-phone" required>
+                                    <span class="form-hint">شماره تماس مدرسه که در فوتر سایت نمایش داده می‌شود</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">ایمیل:</label>
+                                    <input type="email" id="contact-email" required>
+                                    <span class="form-hint">آدرس ایمیل مدرسه که در فوتر سایت نمایش داده می‌شود</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-address">آدرس:</label>
+                                    <textarea id="contact-address" required></textarea>
+                                    <span class="form-hint">آدرس مدرسه که در فوتر سایت نمایش داده می‌شود</span>
+                                </div>
+                            </div>
+
+                            <div class="settings-group">
+                                <h3>مدیریت اخبار</h3>
+                                <div class="news-container">
+                                    <div class="news-list" id="news-list">
+                                        <!-- لیست اخبار اینجا نمایش داده می‌شود -->
+                                    </div>
+                                    <button type="button" class="add-news-btn" id="add-news-btn">
+                                        <i class="fas fa-plus"></i> افزودن خبر جدید
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn">ذخیره تغییرات سایت</button>
+                        </form>
+                    </div>
+                    <div class="preview-container">
+                        <h3>پیش‌نمایش تغییرات</h3>
+                        <div class="preview-box">
+                            <div class="preview-section">
+                                <h4>بخش اصلی</h4>
+                                <div class="preview-hero">
+                                    <h2 id="preview-hero-title">عنوان اصلی</h2>
+                                    <p id="preview-hero-description">توضیحات اصلی</p>
+                                </div>
+                            </div>
+                            <div class="preview-section">
+                                <h4>بخش درباره ما</h4>
+                                <div class="preview-about">
+                                    <h2 id="preview-about-title">عنوان درباره ما</h2>
+                                    <p id="preview-about-description">توضیحات درباره ما</p>
+                                </div>
+                            </div>
+                            <div class="preview-section">
+                                <h4>اطلاعات تماس</h4>
+                                <div class="preview-contact">
+                                    <p id="preview-contact-phone">تلفن: -</p>
+                                    <p id="preview-contact-email">ایمیل: -</p>
+                                    <p id="preview-contact-address">آدرس: -</p>
+                                </div>
+                            </div>
+                            <div class="preview-section">
+                                <h4>بخش اخبار</h4>
+                                <div class="preview-news" id="preview-news">
+                                    <!-- پیش‌نمایش اخبار اینجا نمایش داده می‌شود -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>اطلاعات تماس</h3>
+                <p>پشتیبانی: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                <p>ایمیل: admin@abdollahzadeh.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق محفوظ است © ۱۴۰۳ مدرسه عبدالله زاده</p>
+        </div>
+    </footer>
+
+    <script src="admin.js"></script>
+
+    <!-- مودال افزودن/ویرایش خبر -->
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>افزودن خبر جدید</h3>
+            <form id="news-form">
+                <div class="form-group">
+                    <label for="news-title">عنوان خبر:</label>
+                    <input type="text" id="news-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="news-date">تاریخ:</label>
+                    <input type="date" id="news-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="news-content">متن خبر:</label>
+                    <textarea id="news-content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="news-image">تصویر خبر:</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="news-image-upload" accept="image/*" style="display: none;">
+                        <input type="text" id="news-image" style="display: none;">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('news-image-upload').click()">
+                            <i class="fas fa-upload"></i> آپلود تصویر
+                        </button>
+                    </div>
+                    <div id="news-image-preview" class="image-preview"></div>
+                </div>
+                <button type="submit" class="submit-btn">ذخیره خبر</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

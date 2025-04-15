@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسه عبدالله زاده</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>مدرسه عبدالله زاده</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">خانه</a></li>
+                <li><a href="#about">درباره ما</a></li>
+                <li><a href="#register">ثبت نام</a></li>
+                <li><a href="#news">اخبار</a></li>
+                <li><a href="#contact" class="contact-link">تماس با ما</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>به مدرسه عبدالله زاده خوش آمدید</h2>
+                <p>مکانی برای رشد و تعالی دانش‌آموزان</p>
+                <a href="#register" class="cta-button">ثبت نام</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>درباره مدرسه</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>مدرسه نمونه با بیش از ۲۰ سال سابقه درخشان در زمینه آموزش و پرورش، همواره در تلاش برای ارائه بهترین خدمات آموزشی به دانش‌آموزان بوده است.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>آموزش با کیفیت</h3>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h3>کادر مجرب</h3>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-book"></i>
+                        <h3>امکانات آموزشی</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="register" class="register">
+            <h2>ثبت نام دانش‌آموزان</h2>
+            <button id="open-register-modal" class="cta-button">ثبت نام</button>
+        </section>
+
+        <!-- Modal for Registration -->
+        <div id="register-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>فرم ثبت نام دانش‌آموز</h2>
+                <form id="registration-form" class="registration-form">
+                    <h2>فرم ثبت نام</h2>
+                    <div class="form-group">
+                        <label for="name">نام و نام خانوادگی</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">شماره تماس</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">پایه تحصیلی</label>
+                        <select id="grade" name="grade" required>
+                            <option value="">انتخاب پایه تحصیلی</option>
+                            <option value="اول">اول</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">آدرس منزل</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="father-name">نام پدر</label>
+                        <input type="text" id="father-name" name="father-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mother-name">نام مادر</label>
+                        <input type="text" id="mother-name" name="mother-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="father-job">شغل پدر</label>
+                        <input type="text" id="father-job" name="father-job" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="financial-support">میزان توانایی کمک به مدرسه (میلیون تومان)</label>
+                        <select id="financial-support" name="financial-support" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="1">1 میلیون</option>
+                            <option value="2">2 میلیون</option>
+                            <option value="3">3 میلیون</option>
+                            <option value="4">4 میلیون</option>
+                            <option value="5">5 میلیون</option>
+                            <option value="6">6 میلیون</option>
+                            <option value="7">7 میلیون</option>
+                            <option value="8">8 میلیون</option>
+                            <option value="9">9 میلیون</option>
+                            <option value="10">10 میلیون</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">ثبت نام</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>آدرس: تهران، خیابان نمونه</p>
+                <p>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                <p>ایمیل: info@school.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>لینک‌های مفید</h3>
+                <ul>
+                    <li><a href="#about">درباره ما</a></li>
+                    <li><a href="#register">ثبت نام</a></li>
+                    <li><a href="#news">اخبار</a></li>
+                    <li><a href="login.html">ورود به پنل مدیریت</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق محفوظ است © ۱۴۰۳ مدرسه نمونه</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
